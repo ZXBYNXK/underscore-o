@@ -1,16 +1,9 @@
 const server = require("./server");
 const database = require("./database");
+const api = require("./api");
+const isEmpty = require("./utils/isEmpty");
 module.exports = (input) => {
-    console.log(Object.keys(input))
-    Object.keys(input).forEach(key => {
-        switch(key) {
-            case "server":
-            server(input[key]);
-            break;
-            case "database":
-            database(input[key]);
-            break;
-        }
-    })
-    return;
+    !isEmpty(input["api"]) && api(input["api"])
+    !isEmpty(input["database"]) && database(input["database"])
+    !isEmpty(input["server"]) && server(input["server"]);
 }
