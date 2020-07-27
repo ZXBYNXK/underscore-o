@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-module.exports = async ({ uri, messages: { danger, success } }) => {
+module.exports = async ({ uri, danger, success }) => {
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,

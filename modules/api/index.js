@@ -1,43 +1,31 @@
-const { Router } = require("express");
-const router = Router();
-module.exports = (api) => {
-  console.log(22, api);
+const { appendFile } = require("fs");
+module.exports = ({ api }) => {
+  // DEBUG
+  console.log(`API: ${api}`);
+  // FOR EACH ENDPOINT
   Object.keys(api).forEach((endPoint) => {
-    console.log(23, endPoint);
-    (api[endPoint]).forEach(({type, handler, middleWare = false }) => {
-      switch (type) {
-        case "GET":
-          router.get(
-            endPoint,
-            (middleWare || []),
-            handler
+    // DEBUG
+    console.log(`End-Point: ${endPoint}`)
+    Object.keys(api[endPoint]).forEach((prop) => {
+      prop = prop.toLowerCase();
+      switch (prop) {
+        case "get":
+        case "post":
+        case "put":
+        case "delete":
+          // DEBUG
+          console.log(`Method: ${prop}`);
+          let fileName = `${endPoint.replace(/\//gi, "-").slice(1)}.js`
+          appendFile(
+            fileName,
+            `\nrouter.${prop}("${endPoint}", ${api[endPoint][prop]})`,
+            (err) => {
+              if (err) throw err;
+              console.log(`Saved file: ${}`);
+            }
           );
           break;
-        case "POST":
-          router.post(
-            endPoint,
-            (middleWare || []),
-            handler
-          );
-          break;
-        case "PUT":
-          router.put(
-            endPoint,
-            (middleWare || []),
-            handler
-          );
-          break;
-        case "DELETE":
-          router.delete(
-            endPoint,
-            (middleWare || []),
-            handler
-          );
-          break;
-        default:
-          console.log(`Invalid or no route type provided for ${endPoint}`);
       }
     });
   });
-  
 };
