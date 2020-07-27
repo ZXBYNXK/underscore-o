@@ -1,7 +1,12 @@
-# \_O
-
+# _O
+## About:
 ```javascript
 //  Build an entire back-end by just installing _O
+// 
+```
+
+## How to use:
+```javascript
 
 //  How it will work
 const _O = require("_O");
