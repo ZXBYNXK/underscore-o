@@ -2,7 +2,6 @@
 ## About:
 ```javascript
 //  Build an entire back-end by just installing _O
-// 
 ```
 
 ## How to use:
@@ -11,7 +10,7 @@
 //  How it will work
 const _O = require("_O");
 
-// How to create the server
+// Configure server
 _O({
   server: {
     port: 5000,
@@ -22,7 +21,7 @@ _O({
   },
 });
 
-// How to create the database.
+// Configure database.
 _O({
   database: {
     uri: "-------------",
@@ -33,26 +32,24 @@ _O({
   },
 });
 
-// How to create the models.
+// @Next Creating models.
 _O({
   models: {
     User: [
+    
+      // Multiple fields
       [
-        // Multiple fields
         ["name", "email", "password"],
-        {
-          type: String,
-          required: true,
-        },
+        ["type:String", "required:true"],
       ],
+      
+      // Singles Feilds & Fields with different values 
+      // Add another array bracket with same format as above.
       [
-        // Just a Single Feild
-        ["dateCreated"],
-        {
-          type: Date,
-          default: Date.now,
-        },
+        ["timestamp"],
+        ["type:Date", "default:Date.now()"],
       ],
+    
     ],
 
     // Refs
@@ -60,10 +57,7 @@ _O({
     Profile: [
       [
         ["user"],
-        {
-          type: "MongooseID",
-          ref: "users",
-        },
+        ["type:MongooseID", "ref:users"]
       ],
     ],
   },
@@ -113,7 +107,7 @@ _O({
   },
 });
 
-// You can even
+// Recommended use example
 const server = require("./server");
 const database = require("./database");
 const api = require("./api");
