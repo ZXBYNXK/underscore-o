@@ -1,61 +1,36 @@
 // _O: API Creator
-
-const { appendFile, mkdir } = require("fs");
+const createRouteFile = require("./createRouteFile");
+const initiliazeRoutesDirectory = require("./initilizeRoutesDirectory");
+const appendToRouteFile = require("./appendToRouteFile");
+const appendToServerFile = require("../server/appendToServerFile");
+const declareAll = require("../utils/declareAll");
 
 // MAIN FUNC
 module.exports = async ({ api }) => {
   try {
-    await mkdir("routes", (err) => {
-      if (err) throw err;
-    });
-    await mkdir("routes/api", (err) => {
-      if (err) throw err;
+    await initiliazeRoutesDirectory();
+    await appendToServerFile(declareAll({ express:"express", server: "express()" }));
+    // DEBUG: api[...]
+    // console.log(`API:`, api);
+
+    // FOR EACH ENDPOINT IN FILE:
+    Object.keys(api).forEach(async (endPoint) => {
+      // DEBUG: api[endpoints]
+      console.log(`End-Point: /api/${endPoint}`);
+      // See "./createRouteFile.js"
+      await appendToRouteFile(
+        endPoint,
+        declareAll({"{Router}":'require("express")', "router":"Router()"})
+      );
+      await appendToServerFile(
+        `const ${endPoint} = require("./routes/api/${endPoint}");\nserver.use('/api/${endPoint}', ${endPoint});`
+      );
+      await createRouteFile(endPoint, api[endPoint]);
     });
   } catch (err) {
-    throw err;
+    console.error(err);
+    process.exit(1);
   }
-
-  // MAIN VARS
-  const PATH = "routes/api/";
-  let fileName;
-
-  // DEBUG: api[...]
-  console.log(`API:`, api);
-
-  // FOR EACH ENDPOINT IN FILE:
-  Object.keys(api)
-  .forEach((endPoint) => {
-    // DEBUG: api[endpoints]
-    console.log(`End-Point: /api/${endPoint}`);
-
-    // FOR EACH ENDPOINT IN ROUTE
-    Object.keys(api[endPoint])
-    .forEach((prop) => {
-      prop = prop.toLowerCase();
-      switch (prop) {
-        case "get":
-        case "post":
-        case "put":
-        case "delete":
-          // DEBUG: HTTP Method
-          console.log(`HTTP/${prop.toUpperCase()}/ added...`);
-
-          fileName = `${endPoint}.js`;
-
-          appendFile(
-            PATH + fileName,
-            `\nrouter.${prop}("/", ${api[endPoint][prop]})`,
-            (err) => {
-              if (err) throw err;
-
-              // DEBUG: FileName
-              console.log(`Saved file: ${fileName}`);
-            }
-          );
-          break;
-      }
-    });
-  });
 };
 
 // EXTRAS:

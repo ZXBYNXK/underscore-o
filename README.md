@@ -1,7 +1,13 @@
 # _O
 ## About:
 ```javascript
-//  Build an entire back-end by just installing _O
+//  This package builds an entire MEN stack for you, files directories and all!
+
+//    The '_O()' Function is only required to be called once with the required arguments
+//  in order to create files and directories, that will contain the usual backend of a MEN stack application.
+
+//      PS: In a future version there will hopefully be a feature that will run the backend automatically.
+
 ```
 
 ## How to use:
@@ -14,30 +20,25 @@ const _O = require("_O");
 _O({
   server: {
     port: 5000,
-    messages: {
-      danger: "------------",
-      success: "-----------",
+    success: "Server connected.",
+    danger: "Server connection error",
     },
-  },
 });
 
-// Configure database.
+// @ Next Configure database.
 _O({
   database: {
-    uri: "-------------",
-    messages: {
-      danger: "--------",
-      success: "-------",
+    uri: "",
+    success: "Server connected.",
+    danger: "Server connection error",
     },
-  },
 });
 
 // @Next Creating models.
 _O({
   models: {
     User: [
-    
-      // Multiple fields
+      // Multiple fields W/ Same value
       [
         ["name", "email", "password"],
         ["type:String", "required:true"],
@@ -84,25 +85,37 @@ _O({
             res.status(500).json({msg: "Server Error."})
         }
       }`,
+      
+      }
     },
     profiles: {
       // @next require: ["Models/User", "Middleware/auth", "_O/Validator"],
       get: `async (req, res) => {
-        try {
-            const getAllUsers = await User.find();
-            res.status(200).json(getAllusers);
-        } catch {
-            res.status(500).json({msg: "Server Error."})
-        }
-      }`,
+                try {
+                    const getAllUsers = await User.find();
+                    res.status(200).json(getAllusers);
+                } catch {
+                    res.status(500).json({msg: "Server Error."})
+                }
+            }`,
       post: `async (req, res) => {
-        try {
-            const getAllUsers = await User.find();
-            res.status(200).json(getAllusers);
-        } catch {
-            res.status(500).json({msg: "Server Error."})
-        }
-      }`,
+                try {
+                    const getAllUsers = await User.find();
+                    res.status(200).json(getAllusers);
+                } catch {
+                    res.status(500).json({msg: "Server Error."})
+                }
+            }`,
+      user: {
+        get: `async (req, res) => {
+                try {
+                    const getUserById = await User.findById();
+                    res.status(200).json(getAllusers);
+                } catch {
+                    res.status(500).json({msg: "Server Error."})
+                }
+            }`,
+        
     },
   },
 });
