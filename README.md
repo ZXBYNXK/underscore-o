@@ -1,91 +1,126 @@
-# \_O
-
+# _O
+## About:
 ```javascript
-//  Build an entire back-end by just installing _O
+//  This package builds an entire MEN stack for you, files directories and all!
 
-//  Idea on how it will work
+//    The '_O()' Function is only required to be called once with the required arguments
+//  in order to create files and directories, that will contain the usual backend of a MEN stack application.
+
+//      PS: In a future version there will hopefully be a feature that will run the backend automatically.
+
+```
+
+## How to use:
+```javascript
+
+//  How it will work
 const _O = require("_O");
 
-// How to create the server
+// Configure server
 _O({
-    server: {
-        port: 5000,
-        messages: {
-            danger: "------------",
-            success: "-----------",
-        }
-    }
+  server: {
+    port: 5000,
+    success: "Server connected.",
+    danger: "Server connection error",
+    },
 });
 
-// How to create the database.
+// @ Next Configure database.
 _O({
-    database: {
-        uri: "-------------",
-        messages: {
-            danger: "--------",
-            success: "-------",
-        }
-    }
+  database: {
+    uri: "",
+    success: "Server connected.",
+    danger: "Server connection error",
+    },
 });
 
-// How to create the models.
+// @Next Creating models.
 _O({
-    models: {
-        "User": [
-            [
-                // Multiple fields
-                ["name", "email", "password"],
-                {
-                    type: String,
-                    required: true
-                },
-            ],
-            [
-                // Just a Single Feild
-                ["dateCreated"],
-                {
-                    type:Date,
-                    default:Date.now
-                }
-            ],
-        ],
+  models: {
+    User: [
+      // Multiple fields W/ Same value
+      [
+        ["name", "email", "password"],
+        ["type:String", "required:true"],
+      ],
+      
+      // Singles Feilds & Fields with different values 
+      // Add another array bracket with same format as above.
+      [
+        ["timestamp"],
+        ["type:Date", "default:Date.now()"],
+      ],
+    
+    ],
 
-        // Refs
-        // Use it as a MongooseID
-        "Profile": [
-            [
-                ["user"],
-                {
-                    type: "MongooseID",
-                    ref: "users"
-                },
-
-            ]
-        ]
-    }
+    // Refs
+    // Use it as a MongooseID
+    Profile: [
+      [
+        ["user"],
+        ["type:MongooseID", "ref:users"]
+      ],
+    ],
+  },
 });
 
 // How to create the API
 _O({
-    api: {
-        "/api/users": {
-            type: "GET",
-            middleware: [
-                expressValidator
-                jwtMiddleWare
-            ],
-            handler: (req, res) => {
+  api: {
+    users: {
+      // @next: require: ["Models/User", "Middleware/auth", "_O/Validator"],
+      get: `async (req, res) => {
+        try {
+            const getAllUsers = await User.find();
+            res.status(200).json(getAllusers);
+        } catch {
+            res.status(500).json({msg: "Server Error."})
+        }
+      }`,
+      post: `async (req, res) => {
+        try {
+            const getAllUsers = await User.find();
+            res.status(200).json(getAllusers);
+        } catch {
+            res.status(500).json({msg: "Server Error."})
+        }
+      }`,
+      
+      }
+    },
+    profiles: {
+      // @next require: ["Models/User", "Middleware/auth", "_O/Validator"],
+      get: `async (req, res) => {
                 try {
-                    res.status(200).json({ test });
-                } catch (err) {
-                    res.status(500).json({ msg: "Server Error" });
+                    const getAllUsers = await User.find();
+                    res.status(200).json(getAllusers);
+                } catch {
+                    res.status(500).json({msg: "Server Error."})
                 }
-            },
-        },
-    }
+            }`,
+      post: `async (req, res) => {
+                try {
+                    const getAllUsers = await User.find();
+                    res.status(200).json(getAllusers);
+                } catch {
+                    res.status(500).json({msg: "Server Error."})
+                }
+            }`,
+      user: {
+        get: `async (req, res) => {
+                try {
+                    const getUserById = await User.findById();
+                    res.status(200).json(getAllusers);
+                } catch {
+                    res.status(500).json({msg: "Server Error."})
+                }
+            }`,
+        
+    },
+  },
 });
 
-// You can even
+// Recommended use example
 const server = require("./server");
 const database = require("./database");
 const api = require("./api");
@@ -93,14 +128,14 @@ const models = require("./models");
 
 // All of the below objects will be required, and filled out in the above pattern.
 _O({
-    server,
-    database,
-    api,
-    models
+  server,
+  database,
+  api,
+  models,
 });
 
 // You can store all secret strings here.
 _O.secrets = {
-    mongoUri: "-----------",
-}
+  mongoUri: "-----------",
+};
 ```
