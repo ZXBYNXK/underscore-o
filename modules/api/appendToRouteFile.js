@@ -1,6 +1,6 @@
-const { appendFile } = require("fs");
-module.exports = async (fileName, code = false) =>
-  await appendFile(
+import { appendFileSync } from "fs";
+export default (fileName, code = false) =>
+ appendFileSync(
     `routes/api/${fileName}.js`,
     `${code && `\n${code}`}`,
     (err) => {

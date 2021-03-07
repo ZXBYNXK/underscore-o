@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-module.exports = ({ uri, danger, success }) => {
-   mongoose.connect(uri, {
+import { connect } from "mongoose";
+export default ({ uri, danger, success }) => {
+   connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,

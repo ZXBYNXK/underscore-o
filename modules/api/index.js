@@ -1,15 +1,14 @@
 // _O: API Creator
-const createRouteFile = require("./createRouteFile");
-const initiliazeRoutesDirectory = require("./initilizeRoutesDirectory");
-const appendToRouteFile = require("./appendToRouteFile");
-const appendToServerFile = require("../server/appendToServerFile");
-const declareAll = require("../utils/declareAll");
+import createRouteFile from "./createRouteFile";
+import initiliazeRoutesDirectory from "./initilizeRoutesDirectory";
+import appendToRouteFile from "./appendToRouteFile";
+import appendToServerFile from "../server/appendToServerFile";
+import declareAll from "../utils/declareAll";
 
 // MAIN FUNC
-module.exports = async ({ api }) => {
-  try {
-    await initiliazeRoutesDirectory();
-    await appendToServerFile(declareAll({ express:"express", server: "express()" }));
+export default ({ api }) => {
+    initiliazeRoutesDirectory();
+    appendToServerFile(declareAll({ express:"express", server: "express()" }));
     // DEBUG: api[...]
     // console.log(`API:`, api);
 
@@ -18,20 +17,16 @@ module.exports = async ({ api }) => {
       // DEBUG: api[endpoints]
       console.log(`End-Point: /api/${endPoint}`);
       // See "./createRouteFile.js"
-      await appendToRouteFile(
+     appendToRouteFile(
         endPoint,
         declareAll({"{Router}":'require("express")', "router":"Router()"})
       );
-      await appendToServerFile(
+     appendToServerFile(
         `const ${endPoint} = require("./routes/api/${endPoint}");\nserver.use('/api/${endPoint}', ${endPoint});`
       );
-      await createRouteFile(endPoint, api[endPoint]);
+     createRouteFile(endPoint, api[endPoint]);
     });
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
   }
-};
 
 // EXTRAS:
 // {api: {users}} = api.users = '/api/users' = ./routes/api/users.js - Default is 'api'

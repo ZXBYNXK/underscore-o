@@ -1,4 +1,4 @@
-module.exports = (object) => {
+export default (object) => {
   let template = ``;
   Object.keys(object).forEach((key) => {
     template += `const ${key} = ${object[key]};\n`;

@@ -29,8 +29,8 @@ _O({
 _O({
   database: {
     uri: "",
-    success: "Server connected.",
-    danger: "Server connection error",
+    success: "Database connected.",
+    danger: "Database connection error",
     },
 });
 

@@ -1,13 +1,12 @@
-const server = require("./server");
-const database = require("./database");
-const api = require("./api");
-const isEmpty = require("./utils/isEmpty");
-module.exports = _O = async (input) => {
-    try {
-        !isEmpty(input["api"]) && await api(input["api"])
-        !isEmpty(input["database"]) && await database(input["database"]);
-        !isEmpty(input["server"]) && await server(input["server"]);
-    } catch (err) {
-        console.error(err);
-    }
+// Main file
+//      Responsible for interperting an object passed to it
+// _O({api, database})
+import server from "./server";
+import database from "./database";
+import api from "./api";
+import isEmpty from "./utils/isEmpty";
+export default _O = (input) => {
+    !isEmpty(input["api"]) && api(input["api"])
+    !isEmpty(input["database"]) && database(input["database"]);
+    !isEmpty(input["server"]) &&  server(input["server"]);
 }

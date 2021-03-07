@@ -1,9 +1,14 @@
-const { appendFile } = require("fs");
-module.exports = createRouteFile = (fileName, routesObject) => {
+// Create route file (i.e. project/routesusers.js)
+import { appendFileSync } from "fs";
+
+// @createRouteFile
+// @param fileName  ( Name of route file. )
+// @param routesObject  (An object that contains the )
+export default createRouteFile = (fileName, routesObject) => {
   const PATH = "routes/api/";
 
   // FOR EACH ENDPOINT IN ROUTE
-  Object.keys(routesObject).forEach( async (prop) => {
+  Object.keys(routesObject).forEach( (prop) => {
     prop = prop.toLowerCase();
     switch (prop) {
       case "get":
@@ -12,21 +17,15 @@ module.exports = createRouteFile = (fileName, routesObject) => {
       case "delete":
         // DEBUG: HTTP Method
         console.log(`HTTP/${prop.toUpperCase()}/ added...`);
-        try {
-            await appendFile(
-                `${PATH + fileName}.js`,
-                `\nrouter.${prop}("/", ${routesObject[prop]})`,
-                (err) => {
-                    if (err) throw err;
-
-                    // DEBUG: FileName
-                    console.log(`Saved file: ${fileName}`);
-                }
-            );
-        } catch (err) {
-            throw err;
-        }
-        break;
+        appendFileSync(
+            `${PATH + fileName}.js`,
+            `\nrouter.${prop}("/", ${routesObject[prop]})`,
+            (err) => {
+                if (err) throw err;
+                // DEBUG: FileName
+                console.log(`Saved file: ${fileName}`);           
+            }
+        );
     }
-  });
-};
+  })
+}

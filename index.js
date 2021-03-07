@@ -1,2 +1,2 @@
-const _O = require("./modules");
-module.exports = _O;
+import _O from "./modules";
+export default _O;
