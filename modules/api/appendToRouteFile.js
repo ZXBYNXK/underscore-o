@@ -1,5 +1,5 @@
-import { appendFileSync } from "fs";
-export default (fileName, code = false) =>
+const { appendFileSync } = require("fs");
+module.exports = (fileName, code = false) =>
  appendFileSync(
     `routes/api/${fileName}.js`,
     `${code && `\n${code}`}`,

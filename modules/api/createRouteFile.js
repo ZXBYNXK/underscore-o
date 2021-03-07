@@ -1,10 +1,10 @@
 // Create route file (i.e. project/routesusers.js)
-import { appendFileSync } from "fs";
+const { appendFileSync } = require("fs");
 
 // @createRouteFile
 // @param fileName  ( Name of route file. )
 // @param routesObject  (An object that contains the )
-export default createRouteFile = (fileName, routesObject) => {
+module.exports = createRouteFile = (fileName, routesObject) => {
   const PATH = "routes/api/";
 
   // FOR EACH ENDPOINT IN ROUTE

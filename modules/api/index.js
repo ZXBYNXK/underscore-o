@@ -1,12 +1,12 @@
 // _O: API Creator
-import createRouteFile from "./createRouteFile";
-import initiliazeRoutesDirectory from "./initilizeRoutesDirectory";
-import appendToRouteFile from "./appendToRouteFile";
-import appendToServerFile from "../server/appendToServerFile";
-import declareAll from "../utils/declareAll";
+const createRouteFile = require("./createRouteFile");
+const initiliazeRoutesDirectory = require("./initilizeRoutesDirectory");
+const appendToRouteFile = require( "./appendToRouteFile");
+const appendToServerFile = require( "../server/appendToServerFile");
+const declareAll = require( "../utils/declareAll");
 
 // MAIN FUNC
-export default ({ api }) => {
+module.exports = ({ api }) => {
     initiliazeRoutesDirectory();
     appendToServerFile(declareAll({ express:"express", server: "express()" }));
     // DEBUG: api[...]

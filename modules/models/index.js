@@ -1,4 +1,4 @@
-export default ({ models }) => {
+module.exports = ({ models }) => {
     Object.keys(models).forEach(model => {
         // Create model file & append a declareAll statement w/ required packages.
 
