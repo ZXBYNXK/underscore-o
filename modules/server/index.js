@@ -1,9 +1,9 @@
 const appendServerFile = require("./appendToServerFile");
 const createGitIgnore = require("../utils/createGitIgnore");
-const requireAll = require("../utils/requireAll");
+const declareAll = require("../utils/declareAll");
 module.exports = async ({ port, danger, success }) => {
   try {
-    appendServerFile(requireAll({ "{port}": "./config" }));
+    appendServerFile(declareAll({ "{port}": "require('./config')" }));
     appendServerFile(
       `app.listen(port || process.env.PORT, () => console.log("Server Listening..."));`
     );
