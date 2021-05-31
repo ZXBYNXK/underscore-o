@@ -1,9 +1,6 @@
-const { appendFile } = require("fs");
-module.exports = async (fileName, code = false) =>
-  await appendFile(
+const { appendToFile } = require("../utils/appendToFile");
+module.exports = (fileName, code = false) =>
+  appendToFile(
     `routes/api/${fileName}.js`,
     `${code && `\n${code}`}`,
-    (err) => {
-      if (err) throw err;
-    }
   );

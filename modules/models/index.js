@@ -1,12 +1,13 @@
-// TODO
+// TO-DO:
 module.exports = ({ models }) => {
-    Object.keys(models).forEach(model => {
+    return false;
+    // Object.keys(models).forEach(model => {
         // Create model file & append a declareAll statement w/ required packages.
 
         // itereate through model object
-        Object.keys(model).forEach(mongoProp => {
+//         Object.keys(model).forEach(mongoProp => {
 
-        })
+//         })
 
-    })
+//     })
 }

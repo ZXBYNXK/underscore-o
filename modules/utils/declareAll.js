@@ -4,4 +4,4 @@ module.exports = (object) => {
     template += `const ${key} = ${object[key]};\n`;
   });
   return template;
-};
+}
