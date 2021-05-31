@@ -1,4 +1,6 @@
 const appendServerFile = require("./appendToServerFile");
+const appendToFile = require("../utils/appendToFile");
+const createFile = require("../utils/createFile");
 const createGitIgnore = require("../utils/createGitIgnore");
 const declareAll = require("../utils/declareAll");
 module.exports = async ({ port, danger, success }) => {
