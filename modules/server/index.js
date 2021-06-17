@@ -1,5 +1,3 @@
-const appendServerFile = require("./appendToServerFile");
-// TO-DO: Replace appendServerFile with appendToFile
 const appendToFile = require("../utils/appendToFile");
 
 // TO-DO: Replace createGitIgnore with createFile
@@ -10,10 +8,20 @@ const declareAll = require("../utils/declareAll");
 
 // Make it Sync NOT async
 module.exports = ({ port, danger, success }) => {
-    appendToFile("./server.js", declareAll({ "{port}": "require('./config')" }));
-    appendToFile("./server.js",
+  appendToFile(
+    "./server.js", 
+    (
+      declareAll({ 
+        "{port}": "require('./config')", 
+        "express": "require('express')",  
+        "app":"express()"
+      }) 
+    + 
+    "\n" 
+    +
       `app.listen(port || process.env.PORT, () => console.log("Server Listening..."));`
-    );
+    )
+  );
 };
 
 
