@@ -1,1 +1,1 @@
-# Golang (Not supported yet)
+# Ruby (Not supported yet)

@@ -1,4 +1,8 @@
-module.exports = ({success = "Server Connecected (_O/Default-Msg)", danger = "Server failed to connect... (_O/Default-Msg)"}) => 
+module.exports = (
+    {
+        success = "Server Connecected (_O/Default-Msg)", 
+        danger = "Server failed to connect... (_O/Default-Msg)"}
+    ) => 
     `const mongoose = require("mongoose");\n
     const {uri} = require("./config");\n
     module.exports = async () => {\n
@@ -15,4 +19,4 @@ module.exports = ({success = "Server Connecected (_O/Default-Msg)", danger = "Se
             console.error(err);\n
             process.exit(1);\n
           }
-      }`
+    }`
