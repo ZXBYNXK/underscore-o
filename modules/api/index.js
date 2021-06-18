@@ -1,13 +1,16 @@
 // _O: API Creator
-const createRouteFiles = require("./createRouteFiles");
-const initiliazeRoutesDirectory = require("./initilizeRoutesDirectory");
-const declareAll = require("../utils/declareAll");
-const appendToFile = require("../utils/appendToFile");
+const createRouteFiles = require("../utils/createRouteFiles"),
+createDirectory = require("../utils/createDirectory"),
+declareAll = require("../utils/declareAll"),
+appendToFile = require("../utils/appendToFile");
 
 // MAIN FUNC
 module.exports = ({api}) => {
-    initiliazeRoutesDirectory();
-    appendToFile("./server.js", declareAll({ express:"express", server: "express()" }));
+
+    // May need to create a function that creates directories in one call with args (i.e: ./routes/api/.../.../)
+    createDirectory("./routes");
+    createDirectory("./routes/api")
+
     // DEBUG: api[...]
     // console.log(`API:`, api);
 

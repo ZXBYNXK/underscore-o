@@ -1,4 +1,4 @@
-const { appendToFile } = require("../utils/appendToFile");
+const appendToFile = require("./appendToFile");
 module.exports = createRouteFile = (fileName, routesObject) => {
   const PATH = "./routes/api/";
   // FOR EACH ENDPOINT IN ROUTE

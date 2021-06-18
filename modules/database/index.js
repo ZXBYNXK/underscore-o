@@ -9,7 +9,8 @@ databaseTemplate = require("../utils/templates/backend/node/database");
     this application to work.
 */
 
-module.exports = ({danger, success}) => {
+// Creates a database file for nodejs by default or with given arguments for returning a template
+module.exports = ({success, danger}) => {
   createDirectory("./config");
-  appendToFile("./config/db.js", databaseTemplate(success, danger));
+  appendToFile("./config/db.js", databaseTemplate({success, danger}));
 }

@@ -1,7 +1,11 @@
-const {database} = require("./defaults");
+const msgDefaults = require("./defaults").database;
 
 module.exports = (
-    database
+    database = {
+      ...msgDefaults,
+      success,
+      danger
+    }
     ) => 
     `const mongoose = require("mongoose");\n
     const {uri} = require("./config");\n
@@ -13,9 +17,9 @@ module.exports = (
               useCreateIndex: true,\n
               useFindAndModify: false,\n
             });\n
-            console.log("${success}" || "Connected to database.");\n
+            console.log("${database.success}");\n
           } catch(err) {\n
-            console.log("${danger}");\n
+            console.log("${database.danger}");\n
             console.error(err);\n
             process.exit(1);\n
           }
