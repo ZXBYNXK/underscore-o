@@ -1,7 +1,7 @@
+const {database} = require("./defaults");
+
 module.exports = (
-    {
-        success = "Server Connecected (_O/Default-Msg)", 
-        danger = "Server failed to connect... (_O/Default-Msg)"}
+    database
     ) => 
     `const mongoose = require("mongoose");\n
     const {uri} = require("./config");\n

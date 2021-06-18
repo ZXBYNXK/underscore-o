@@ -1,4 +1,6 @@
+// See declareAll.js in ./utils
 const declareAll = require("../../../declareAll");
+
 module.exports = () =>
     `${declareAll({ 
             "{port}": "require('./config')", 
