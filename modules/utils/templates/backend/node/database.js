@@ -1,8 +1,7 @@
 const msgDefaults = require("./defaults").database;
 
 module.exports = (
-    database = {
-      ...msgDefaults,
+    {
       success,
       danger
     }
@@ -17,9 +16,9 @@ module.exports = (
               useCreateIndex: true,\n
               useFindAndModify: false,\n
             });\n
-            console.log("${database.success}");\n
+            console.log("${success || msgDefaults.success}");\n
           } catch(err) {\n
-            console.log("${database.danger}");\n
+            console.log("${danger || msgDefaults.danger}");\n
             console.error(err);\n
             process.exit(1);\n
           }

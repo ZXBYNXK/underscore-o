@@ -3,9 +3,10 @@ serverTemplate = require("../utils/templates/backend/node/server");
 // Make it Sync NOT async
 module.exports = () => {
 
-  // Appends to server file with templated code. 
+  // Appends to top of server file with templated code. 
   appendToFile(
     "./server.js", 
-    serverTemplate()
+    serverTemplate(),
+    true
   );
-};
+}

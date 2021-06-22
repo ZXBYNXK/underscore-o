@@ -13,7 +13,7 @@ module.exports = createRouteFile = (fileName, routesObject) => {
         console.log(`"HTTP/${reqType.toUpperCase()}/" added handler... :)`);
         appendToFile(
                 `${PATH + fileName}.js`,
-                `\nrouter.${reqType}("/", ${routesObject[reqType]})`,
+                `\nrouter.${reqType}("/${fileName}", ${routesObject[reqType]})`,
             );
         break;
     }

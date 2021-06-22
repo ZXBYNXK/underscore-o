@@ -1,35 +1,42 @@
 // _O: API Creator
-const createRouteFiles = require("../utils/createRouteFiles"),
-createDirectory = require("../utils/createDirectory"),
+// CAUTION: This file mutates the server.js file --Going to think of an alternative for SOC.
+const structure = require("../utils/structures/node/structure");
+const createRouteFile = require("../utils/createRouteFile"),
 declareAll = require("../utils/declareAll"),
 appendToFile = require("../utils/appendToFile");
 
 // MAIN FUNC
 module.exports = ({api}) => {
-
-    // May need to create a function that creates directories in one call with args (i.e: ./routes/api/.../.../)
-    createDirectory("./routes");
-    createDirectory("./routes/api")
-
     // DEBUG: api[...]
     // console.log(`API:`, api);
-
+    const API_PATH = structure["API_PATH"];
     // FOR EACH ENDPOINT IN FILE:
     Object.keys(api).forEach(endPoint => {
+      
+      let apiPathToEndPoint = API_PATH + endPoint;
+      
       // DEBUG: api[endpoints]
-      console.log(`End-Point: /api/${endPoint}`);
+      console.log(`End-Point: ${apiPathToEndPoint}`);
+
       // See "./appendToFile.js"
       appendToFile(
-        endPoint,
+        `${apiPathToEndPoint}.js`,
         declareAll({"{Router}":'require("express")', "router":"Router()"})
       );
+
+      // --models
+      // appendToFile(
+      //   `${apiPathToEndPoint}.js`
+      // )
+
       appendToFile(
         "./server.js",
-        `const ${endPoint} = require("./routes/api/${endPoint}");\nserver.use('/api/${endPoint}', ${endPoint});`
+        `\nconst ${endPoint} = require("${apiPathToEndPoint}");\nserver.use('${API_PATH}', ${endPoint});`
       );
-      createRouteFiles(endPoint, api[endPoint]);
+      
+      createRouteFile(endPoint, api[endPoint]);
+    
     });
-};
 
-// EXTRAS:
-// {api: {users}} = api.users = '/api/users' = ./routes/api/users.js - Default is 'api'
+    appendToFile("./server.js", `server.listen(port || process.env.PORT, () => console.log("Server Listening..."));`);
+};
