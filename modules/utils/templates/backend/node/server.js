@@ -1,9 +1,13 @@
 // See declareAll.js in ./utils
 const declareAll = require("../../../declareAll");
 
-module.exports = () =>
-    `${declareAll({ 
-            "{port}": "require('./config')", 
+module.exports = (server) => {
+   const REQUIREMENTS = { 
+            "{port}": "require('./secrets')",
+            "database":"require('./secrets/db')", 
             "express": "require('express')",  
             "server":"express()"
-        })}\n` // TO-DO: Problem --should be at the bottom of file
+        }
+   return `${declareAll(REQUIREMENTS)}\n`; 
+
+}

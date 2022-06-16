@@ -2,7 +2,7 @@ const createDirectories = require("../../createDirectories"),
 structure = require("./structure");
 
 module.exports = () => {
-    console.log(structure);
+    // console.log(structure);
     // config folder for containing secrets and database connector file
     createDirectories(structure["SECRET_PATH"]);
 
@@ -11,4 +11,10 @@ module.exports = () => {
 
     // Create a models directory to hold all the mongoose model files
     createDirectories(structure["MODELS_PATH"]);
+    
+    // Create a models directory to hold all the mongoose model files
+    createDirectories(structure["MIDDLEWARE_PATH"]);
+    
+    // Create a models directory to hold all the mongoose model files
+    createDirectories(structure["UTILS_PATH"]);
 }

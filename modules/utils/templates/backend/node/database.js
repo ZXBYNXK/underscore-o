@@ -7,7 +7,7 @@ module.exports = (
     }
     ) => 
     `const mongoose = require("mongoose");\n
-    const {uri} = require("./config");\n
+    const {uri} = require("./index");\n
     module.exports = async () => {\n
       try {\n
         mongoose.connect(uri, {\n
@@ -22,4 +22,4 @@ module.exports = (
             console.error(err);\n
             process.exit(1);\n
           }
-    }`
+    }`
