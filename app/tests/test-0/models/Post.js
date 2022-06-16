@@ -43,19 +43,11 @@ const PostSchema = new mongoose.Schema({
 	},
 
 	publishedAt: {
-		0: D,
-		1: a,
-		2: t,
-		3: e,
+		type: Date,
 	},
 
 	videoLength: {
-		0: N,
-		1: u,
-		2: m,
-		3: b,
-		4: e,
-		5: r,
+		type: Number,
 	},
 
 	comments: {

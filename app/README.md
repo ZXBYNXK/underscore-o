@@ -1,3 +1,14 @@
 # _O App Example
-Checkout the code, this is the recommended usage so far.<br> 
-More content will be added here ASAP.
+### Getting started<br> 
+Renew test <br>
+```bash
+cd tests
+. ./.renew_test.sh
+Which test file would you like to renew: test-0
+```
+Run test <br>
+```bash
+cd tests
+. ./.run_test.sh
+Test file name: test-0 
+```
