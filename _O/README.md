@@ -1,4 +1,5 @@
 # _O
+[See usage example, below content examples may be too old. (WILL UPDATE OLD CONTENT)](../app)
 ## About:
 ```javascript
 //  This package builds an entire MEN stack for you, files directories and all!
@@ -34,7 +35,7 @@ _O({
     },
 });
 
-// @Next Creating models.
+// @Next Creating models. (Old)
 _O({
   models: {
     User: [
@@ -64,7 +65,7 @@ _O({
   },
 });
 
-// How to create the API
+// How to create the API (Sort of old @next has been implemented as include instead of require)
 _O({
   api: {
     users: {
@@ -120,7 +121,7 @@ _O({
   },
 });
 
-// Recommended use example
+// Recommended use example (Still supported)
 const server = require("./server");
 const database = require("./database");
 const api = require("./api");
