@@ -1,5 +1,5 @@
 # _O
-[See usage example, below content examples may be too old. (WILL UPDATE OLD CONTENT)](../app)
+[See usage example, the below content examples may be too old. (WILL UPDATE OLD CONTENT)](../app)
 ## About:
 ```javascript
 //  This package builds an entire MEN stack for you, files directories and all!
